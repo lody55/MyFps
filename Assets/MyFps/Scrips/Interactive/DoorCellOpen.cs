@@ -26,6 +26,9 @@ namespace MyFps
 
         //애니 파라미터 스트링
         private string paramIsOpen = "IsOpen";
+
+        //크로스헤어
+        public GameObject extraCross;
         #endregion
 
 
@@ -38,7 +41,7 @@ namespace MyFps
 
         private void OnMouseOver()
         {
-            
+            extraCross.SetActive(true);
             if (theDistance <= 2f)
             {
                 //Debug.Log("액션 (E)키를 누르세요");
@@ -62,6 +65,7 @@ namespace MyFps
         {
 
             HideActionUI();
+            extraCross.SetActive(false);
         }
 
         #endregion
@@ -69,12 +73,16 @@ namespace MyFps
         {
             actionUI.SetActive(true);
             actionText.text = action;
+
+            //extraCross.SetActive(true);
         }
 
         void HideActionUI()
         {
             actionUI.SetActive(false);
             actionText.text = "";
+
+            //extraCross.SetActive(false);
         }
 
     }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 namespace MyFps
@@ -5,12 +6,15 @@ namespace MyFps
     public class PlayerController : MonoBehaviour
     {
         #region Variables
+        //게임스타트 딜레이 이미지
+        //public GameObject blackImage;
+
         //참조
         private CharacterController controller;
 
         //입력
         private Vector2 inputMove;
-
+        
         //이동
         [SerializeField] private float moveSpeed = 10f;
 
@@ -25,17 +29,22 @@ namespace MyFps
 
         //점프 높이
         [SerializeField] private float jumpHeight = 2f;
+
+        
+        
         #endregion
 
         #region Unity Event Method
         private void Start()
         {
             controller = this.GetComponent<CharacterController>();
+            
 
         }
 
         private void Update()
         {
+            
             //땅에 있으면
             bool isGrounded = GroundCheck();
             if (isGrounded && velocity.y < 0f)
@@ -59,6 +68,7 @@ namespace MyFps
         #region Custum Method
         public void OnMove(InputAction.CallbackContext context)
         {
+            
             inputMove = context.ReadValue<Vector2>();
         }
 
@@ -69,12 +79,14 @@ namespace MyFps
         }
         public void OnJump(InputAction.CallbackContext context)
         {
+            
             if (context.started && GroundCheck())
             {
                 //점프 높이만 뛰는 속도 구하기
                 velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
             }
         }
+        
         #endregion
     
     }

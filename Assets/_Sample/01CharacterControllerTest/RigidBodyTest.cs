@@ -8,7 +8,7 @@ namespace MySample
         private Rigidbody rb;
 
         //Èû
-        [SerializeField] private float power = 100f;
+        //[SerializeField] private float power = 100f;
         #endregion
 
         private void Start()
