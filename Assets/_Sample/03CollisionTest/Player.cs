@@ -9,6 +9,8 @@ namespace CollisionTests
         private Renderer render;
         private Color originColor;
 
+        
+
         private void Start()
         {
             rb = GetComponent<Rigidbody>();

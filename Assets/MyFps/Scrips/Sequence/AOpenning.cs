@@ -18,6 +18,8 @@ namespace MyFps
 
         private void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             StartCoroutine(StartText());
             
         }
