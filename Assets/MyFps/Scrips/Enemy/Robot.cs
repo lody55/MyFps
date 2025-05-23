@@ -1,3 +1,4 @@
+using Unity.Properties;
 using UnityEngine;
 namespace MyFps
 {
@@ -10,13 +11,15 @@ namespace MyFps
         R_Death
     }
 
-    public class Robot : MonoBehaviour
+    public class Robot : MonoBehaviour 
     {
+        //
         #region Variables
         //참조
         public Animator animator;
         public Transform thePlayer;     //공격 타겟
-        
+        private RobotHealth robot;
+
         //로봇의 현재 상태
         private RobotState robotState;
 
@@ -26,11 +29,8 @@ namespace MyFps
         //애니메이션 파라미터
         private string enemyState = "EnemyState";
 
-        //체력
-        private float currentHealth;
-        [SerializeField]private float maxHealth = 20f;
-        private bool isDeath = false;
 
+        
 
         //이동 속도(걷기)
         [SerializeField]private float moveSpeed = 5f;
@@ -40,26 +40,39 @@ namespace MyFps
 
         //공격 시간
         [SerializeField] private float attackDelay = 2f;
-        //마지막 공격시간
+        //공격 타이머
         [SerializeField] private float lastAttackTime;
+
+        //공격력
+        private float attackDamage = 5f; 
 
         #endregion
 
         #region Unity Event Method
-        private void Start()
+        
+        
+        private void Awake()
         {
+            robot = this.GetComponent<RobotHealth>();
             //참조
             animator = this.GetComponent<Animator>();
-            
+
         }
+
         private void OnEnable()
         {
-            //초기화
+            robot.OnDie += OnDie;
             ChangeState(RobotState.R_Idle);
+        }
+        private void OnDisable()
+        {
+            robot.OnDie -= OnDie;
+
         }
 
         private void Update()
         {
+            if (robot.IsDeath) return;
             if (thePlayer == null) return;
             EnemyAttack();
             
@@ -86,28 +99,7 @@ namespace MyFps
             animator.SetInteger(enemyState, (int)robotState);
         }
 
-        //데미지 입기
-        public void TakeDamage(float damage)
-        {
-            currentHealth -= damage;
-
-            //데미지 연출 - Sfx , Vfx...등등
-
-            if (currentHealth <= 0f && isDeath == false)
-            {
-                Death();
-            }
-        }
-        private void Death()
-        {
-            isDeath = true;
-
-            ChangeState(RobotState.R_Death);
-            Destroy(gameObject, 3f);
-
-            //보상처리...등
-            
-        }
+       
         private void EnemyAttack()
         {
 
@@ -117,12 +109,7 @@ namespace MyFps
 
             float distance = Vector3.Distance(transform.position, target);
 
-            if (distance > attackRange)
-            {
-                
-                    ChangeState(RobotState.R_Walk);
-                
-            }
+
 
             //사거리 체크
             if (distance <= attackRange)
@@ -131,10 +118,11 @@ namespace MyFps
                 if (Time.time - lastAttackTime >= attackDelay)
                 {
                     ChangeState(RobotState.R_Attack);
-                    lastAttackTime = Time.time;
+                    lastAttackTime = 0f;
                 }
             }
             
+
 
             switch (robotState)
             {
@@ -145,12 +133,49 @@ namespace MyFps
 
                     break;
                 case RobotState.R_Attack:
+                    
+                   
+
+                    //공격 범위 체크
+                    if (distance > attackRange)
+                    {
+                        ChangeState(RobotState.R_Walk);
+                    }
                     break;
                 case RobotState.R_Death:
                     break;
             }
-            
-            
+
+        }
+
+        private void OnAttackTimer()
+        {
+            lastAttackTime += Time.deltaTime;
+            if(lastAttackTime >= attackDelay)
+            {
+                //타이머 내용
+                
+                //타이머 초기화
+                lastAttackTime = 0f;
+                
+            }
+        }
+        public void Attack()
+        {
+            Debug.Log($"플레이어에게 {attackDamage}를 준다");
+            PlayerHealth playerHealth = thePlayer.GetComponent<PlayerHealth>();
+            if (playerHealth)
+            {
+                playerHealth.TakeDamage(attackDamage);
+            }
+        }
+
+        //죽음시 호출되는 함수
+        private void OnDie()
+        {
+            ChangeState(RobotState.R_Death);
+            this.GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject, 10f);
         }
         #endregion
 

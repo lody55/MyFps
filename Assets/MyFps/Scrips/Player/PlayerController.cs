@@ -1,3 +1,4 @@
+using MyDefence;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,11 +7,11 @@ namespace MyFps
     public class PlayerController : MonoBehaviour
     {
         #region Variables
-        //게임스타트 딜레이 이미지
-        //public GameObject blackImage;
+        
 
         //참조
         private CharacterController controller;
+        private PlayerHealth playerHealth;
 
         //입력
         private Vector2 inputMove;
@@ -26,19 +27,20 @@ namespace MyFps
         public Transform groundCheck;   //발바닥 위치
         [SerializeField] private float checkRange = 0.2f;    //체크하는 구의 반경
         [SerializeField] private LayerMask groundMask;   //그라운드 레이어 판별
-
+        
         //점프 높이
         [SerializeField] private float jumpHeight = 2f;
 
-        
         
         #endregion
 
         #region Unity Event Method
         private void Start()
         {
-            controller = this.GetComponent<CharacterController>();
-            
+            controller = GetComponent<CharacterController>();
+            playerHealth = GetComponent<PlayerHealth>();
+
+
 
         }
 
@@ -86,6 +88,7 @@ namespace MyFps
                 velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
             }
         }
+        
         
         #endregion
     

@@ -41,6 +41,7 @@ namespace MyFps
             {
                 robot.ChangeState(RobotState.R_Walk);
             }
+            Destroy(gameObject);
         }
 
     }
