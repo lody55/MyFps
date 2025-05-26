@@ -12,6 +12,7 @@ namespace MyFps
         //참조
         private CharacterController controller;
         private PlayerHealth playerHealth;
+        [SerializeField] private PistolShoot pistolShoot;
 
         //입력
         private Vector2 inputMove;
@@ -39,7 +40,7 @@ namespace MyFps
         {
             controller = GetComponent<CharacterController>();
             playerHealth = GetComponent<PlayerHealth>();
-
+            pistolShoot = GetComponentInChildren<PistolShoot>();
 
 
         }
@@ -88,9 +89,32 @@ namespace MyFps
                 velocity.y = Mathf.Sqrt(-2f * gravity * jumpHeight);
             }
         }
-        
-        
+
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            //Debug.Log("OnFire 호출됨 - 진입!");
+            // if (PlayerDataManager.Instance.weaponType == WeaponType.None) return;
+
+            if (context.started)
+            {
+                //Debug.Log("context.started OK");
+                if (pistolShoot == null)
+                {
+                    //Debug.LogError("pistolShoot가 null!");
+                    pistolShoot = GetComponentInChildren<PistolShoot>();
+                    if (pistolShoot == null)
+                    {
+                        //Debug.LogError("GetComponentInChildren도 null!");
+                        return;
+                    }
+                }
+                
+                pistolShoot.Fire();
+                //Debug.Log("pistolShoot.Fire() 호출함");
+            }
+        }
+
         #endregion
-    
+
     }
 }

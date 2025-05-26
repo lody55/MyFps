@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace MyFps
         
 
         //연사방지
-        private bool isFire = false;
+        public bool isFire = false;
 
         //애니메이션 파라미터
         private string fire = "Fire";
@@ -63,11 +64,13 @@ namespace MyFps
         #endregion
 
         #region Custom Method
-        public void OnFire(InputAction.CallbackContext context)
+        public void Fire()
         {
-            if (context.started && isFire == false) // key Down
+            //Debug.Log("Fire() 진입");
+            if (isFire) {  return; }
+            //Debug.Log("Shot 코루틴 시작");
+            if (PlayerDataManager.Instance.UseAmmo(1))
             {
-                
                 StartCoroutine(Shot());
             }
         }

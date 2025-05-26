@@ -29,6 +29,10 @@ namespace MyFps
         //애니메이션 파라미터
         private string enemyState = "EnemyState";
 
+        //배경음 전환
+        public AudioSource jumpScare;
+        public AudioSource bgm01;
+
 
         
 
@@ -175,6 +179,9 @@ namespace MyFps
         {
             ChangeState(RobotState.R_Death);
             this.GetComponent<BoxCollider>().enabled = false;
+            //배경음 변경
+            jumpScare.Stop();
+            bgm01.Play();
             Destroy(gameObject, 10f);
         }
         #endregion
