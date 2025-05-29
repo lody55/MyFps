@@ -6,7 +6,7 @@ namespace MyFps
         #region Variables
         protected string pickup = "Pick Up AmmoBox";
 
-        [SerializeField] protected GameObject arrow;
+        //  [SerializeField] protected GameObject arrow;
         #endregion
 
         #region Unity Event Method
@@ -24,8 +24,8 @@ namespace MyFps
         }
         protected override void DoAction()
         {
-            PlayerDataManager.Instance.AmmoCount = 7;
-            arrow.SetActive(false);
+            PlayerDataManager.Instance.AmmoCount += 7;
+            //arrow.SetActive(false);
             actionUI.SetActive(false);
             extraCross.SetActive(false);
             Debug.Log("탄환 7개를 지급 했습니다");

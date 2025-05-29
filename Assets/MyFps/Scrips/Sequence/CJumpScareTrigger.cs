@@ -41,7 +41,7 @@ namespace MyFps
             jumpScare.Play();
 
 
-            //로봇의 상태가 걷기 상태로 변경
+            //로봇의 상태가 걷기 상태로 변경 
             Robot robot = enemy.GetComponent<Robot>();
             if(robot)
             {

@@ -28,6 +28,11 @@ namespace MyFps
             {
                 distanceFromTarget = hit.distance;
                 toTarget = hit.distance;
+                //Debug.Log($"{hit.transform.name}");
+            }
+            else
+            {
+                distanceFromTarget = Mathf.Infinity;
             }
         }
         

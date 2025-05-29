@@ -9,7 +9,7 @@ namespace MyFps
     public class AOpenning : MonoBehaviour
     {
         //플레이어 오브젝트
-        public GameObject Player;
+        public GameObject thePlayer;
         //텍스트
         public TextMeshProUGUI sequenceText;
 
@@ -35,7 +35,7 @@ namespace MyFps
 
         IEnumerator StartText()
         {
-            PlayerInput input = Player.GetComponent<PlayerInput>();
+            PlayerInput input = thePlayer.GetComponent<PlayerInput>();
             input.enabled = false;
 
             //Player.SetActive(false);

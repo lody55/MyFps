@@ -15,7 +15,7 @@ namespace MyFps
         public GameObject ammoUI;
         public GameObject ammoBox;
         public GameObject secondTrigger;
-        public GameObject arrow2;
+        //public GameObject arrow2;
 
 
         private void Start()
@@ -45,7 +45,7 @@ namespace MyFps
             arrow.SetActive(false);
             extraCross.SetActive(false);
             ammoUI.SetActive(true);
-            arrow2.SetActive(true);
+            //arrow2.SetActive(true);
             Destroy(gameObject);
             
         }

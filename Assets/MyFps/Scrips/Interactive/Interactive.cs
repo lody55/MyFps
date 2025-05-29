@@ -5,7 +5,7 @@ namespace MyFps
     //인터렉티브 액션의 부모 클래스
     public class Interactive : MonoBehaviour
     {
-        protected float distance = 0f;
+        [SerializeField]protected float distance = 0f;
         protected string action = "Do Action";
 
         public Animator animator;
@@ -16,23 +16,26 @@ namespace MyFps
         [SerializeField] protected GameObject extraCross;
         [SerializeField] protected TextMeshProUGUI actionText;
 
+        private Transform playerTransform;
 
+        private void Start()
+        {
+            
+        }
 
-         void Update()
-         {
-                distance = PlayerCasting.distanceFromTarget;
-         }
+        void Update()
+        {
+            distance = PlayerCasting.distanceFromTarget;
+        }
 
         private void OnMouseOver()
         {
-            extraCross.SetActive(true);
             if (distance <= 2f)
             {
-                //Debug.Log("액션 (E)키를 누르세요");
-                //Action UI 보여주기
+                
                 ShowActionUI();
                 extraCross.SetActive(true);
-                //키 입력 체크
+                
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     DoAction();

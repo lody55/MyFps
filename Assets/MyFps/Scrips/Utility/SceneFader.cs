@@ -21,6 +21,7 @@ namespace MyDefence
 
         private void Start()
         {
+           
             //초기화
             img.color = new Color(0f, 0f, 0f, 1f);
 
