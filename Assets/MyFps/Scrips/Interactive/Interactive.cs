@@ -10,13 +10,17 @@ namespace MyFps
 
         public Animator animator;
         
-        //[SerializeField] GameObject realPistol;
+        
         [SerializeField] protected GameObject actionUI;
-        //[SerializeField] GameObject arrow;
+        
         [SerializeField] protected GameObject extraCross;
         [SerializeField] protected TextMeshProUGUI actionText;
-
+        //인터렉티브 기능 사용 여부
+        [SerializeField]protected bool unInteractive = false;
+        
         private Transform playerTransform;
+
+
 
         private void Start()
         {
@@ -30,6 +34,10 @@ namespace MyFps
 
         private void OnMouseOver()
         {
+            //인터렉티브 기능 끄기
+            if (unInteractive) return;
+
+
             if (distance <= 2f)
             {
                 
