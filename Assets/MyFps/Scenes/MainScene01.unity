@@ -15725,6 +15725,7 @@ MonoBehaviour:
   actionUI: {fileID: 1996010966}
   extraCross: {fileID: 646872011}
   actionText: {fileID: 987821322}
+  unInteractive: 0
   bgm01: {fileID: 1872700680}
   openDoorSound: {fileID: 1649152488}
 --- !u!1 &848733240
@@ -17831,6 +17832,7 @@ MonoBehaviour:
   actionUI: {fileID: 1996010966}
   extraCross: {fileID: 646872011}
   actionText: {fileID: 987821322}
+  unInteractive: 0
   realPistol: {fileID: 8458123342678610027}
   arrow: {fileID: 1335297525}
   ammoUI: {fileID: 323959330}
@@ -19753,6 +19755,7 @@ MonoBehaviour:
   actionUI: {fileID: 1996010966}
   extraCross: {fileID: 646872011}
   actionText: {fileID: 995589247}
+  unInteractive: 0
   audioSource: {fileID: 1649152488}
 --- !u!1001 &1369715728
 PrefabInstance:
