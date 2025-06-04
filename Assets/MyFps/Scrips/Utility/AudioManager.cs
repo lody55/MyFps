@@ -15,7 +15,7 @@ namespace MyFps
 
         #endregion
 
-        private void Awake()
+        private void  Awake()
         {
             base.Awake();
 
@@ -110,6 +110,11 @@ namespace MyFps
                 return;
             }
             sound.source.Play();
+        }
+        public void StopBgm()
+        {
+            //배경음 정지
+            Stop(bgmSound);
         }
         #endregion
     }

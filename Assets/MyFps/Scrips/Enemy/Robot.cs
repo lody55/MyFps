@@ -8,12 +8,15 @@ namespace MyFps
         R_Idle,
         R_Walk,
         R_Attack,
-        R_Death
+        R_Death,
+        R_Patrol,
+        R_Chase
+            
     }
 
     public class Robot : MonoBehaviour 
     {
-        //
+        //enemy의 상태를 제어하는클래스
         #region Variables
         //참조
         public Animator animator;
@@ -25,6 +28,8 @@ namespace MyFps
 
         //로봇의 이전 상태
         private RobotState beforeState;
+
+        
 
         //애니메이션 파라미터
         private string enemyState = "EnemyState";
