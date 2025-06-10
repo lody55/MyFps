@@ -18,8 +18,7 @@ namespace MyFps
 
         [SerializeField] float maxHealth = 20f;
 
-        private bool isDeath = false;
-
+        private bool isDeath;
 
         //데미지 효과
         public GameObject damageFlash;
@@ -49,6 +48,7 @@ namespace MyFps
             //데미지 연출(Sfx, Vfx)
             StartCoroutine(DamageEffect());
 
+
             if (currentHealth <= 0 && isDeath == false)
             {
                 Die();
@@ -59,7 +59,8 @@ namespace MyFps
         {
             //vfx
             damageFlash.SetActive(true);
-
+            //카메라 흔들기
+            CinemachinCameraShake.Instance.Shake(2f, 2f, 0.5f);
             //sfx
             int randNum = Random.Range(1, 4);
             if (randNum == 1)

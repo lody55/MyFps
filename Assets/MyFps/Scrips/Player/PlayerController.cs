@@ -7,12 +7,13 @@ namespace MyFps
     public class PlayerController : MonoBehaviour
     {
         #region Variables
-        
-
         //참조
         private CharacterController controller;
         private PlayerHealth playerHealth;
         [SerializeField] private PistolShoot pistolShoot;
+
+        //Safe Zone 안에 있는지 확인
+        public static bool safeZoneIn;
 
         //입력
         private Vector2 inputMove;
