@@ -16285,6 +16285,10 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 7823143949727403238, guid: 13897d0bf2000a8498b1ac573d1f7d57, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 3d6bbf84c5046ff44b9a1dd94debc8ff, type: 2}
+    - target: {fileID: 7823143949727403238, guid: 13897d0bf2000a8498b1ac573d1f7d57, type: 3}
       propertyPath: sounds.Array.size
       value: 4
       objectReference: {fileID: 0}

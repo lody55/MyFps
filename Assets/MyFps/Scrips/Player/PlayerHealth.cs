@@ -16,7 +16,7 @@ namespace MyFps
         //체력
         private float currentHealth;
 
-        [SerializeField] float maxHealth = 20f;
+        
 
         private bool isDeath;
 
@@ -32,7 +32,7 @@ namespace MyFps
 
         private void Start()
         {
-            currentHealth = maxHealth;
+            currentHealth = PlayerDataManager.Instance.PlayerHealth;
         }
 
         #endregion
@@ -44,6 +44,9 @@ namespace MyFps
         {
             currentHealth -= damage;
             Debug.Log($"Player currentHealth : {currentHealth}");
+
+            PlayerDataManager.Instance.PlayerHealth = currentHealth;
+
 
             //데미지 연출(Sfx, Vfx)
             StartCoroutine(DamageEffect());
@@ -84,6 +87,9 @@ namespace MyFps
             isDeath = true;
 
             fader.FadeTo(loadToScene);
+
+            //TODO : 죽은 후 게임씬 저장
+
             //죽음처리
             Debug.Log("Game Over");
         }

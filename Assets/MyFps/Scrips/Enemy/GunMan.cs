@@ -213,7 +213,7 @@ namespace MyFps
                 animator.SetInteger(enemyState, (int)gunManState);
                 idleTime = Random.Range(1f, 3f);
 
-                agent.ResetPath();
+                SafeResetPath();
             }
             else if (gunManState == RobotState.R_Chase)
             {
@@ -231,7 +231,7 @@ namespace MyFps
                 animator.SetLayerWeight(1, 1);
                 animator.SetTrigger(fire);
 
-                agent.ResetPath();
+                SafeResetPath();
             }
             
             else
@@ -241,11 +241,18 @@ namespace MyFps
 
             
         }
+        private void SafeResetPath()
+        {
+            // Unity 2018.3 이상에서 isOnNavMesh로 체크 가능
+            if (agent != null && agent.enabled && agent.isOnNavMesh)
+                agent.ResetPath();
+        }
 
         //죽음시 호출되는 함수
         private void OnDie()
         {
             ChangeState(RobotState.R_Death);
+            SafeResetPath();
             this.GetComponent<BoxCollider>().enabled = false;
 
             //추가 구현 내용

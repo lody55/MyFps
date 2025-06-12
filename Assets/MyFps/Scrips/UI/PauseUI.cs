@@ -1,3 +1,4 @@
+using MyDefence;
 using UnityEngine;
 using UnityEngine.InputSystem;
 namespace MyFps
@@ -8,7 +9,8 @@ namespace MyFps
         #region Variables
         public GameObject pauseUI;
         private bool isPause = false;
-
+        private string loadToScene = "MainMenu";
+        private SceneFader fader;
         
         #endregion
 
@@ -41,6 +43,7 @@ namespace MyFps
             Time.timeScale = 1f;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            fader.FadeTo(loadToScene);
 
             Debug.Log("메인메뉴로 갑니다");
         }

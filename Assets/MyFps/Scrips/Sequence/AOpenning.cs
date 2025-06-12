@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 namespace MyFps
 {
     //플레이 씬 오프닝 연출
@@ -27,8 +28,20 @@ namespace MyFps
 
         private void Start()
         {
+            //게임 데이터(씬 번호) 저장
+            /* PlayerPrefs 모드
+            int sceneNumber = SceneManager.GetActiveScene().buildIndex;
+            Debug.Log($"Save Scene number : {sceneNumber}");
+            PlayerPrefs.SetInt("SceneNumber",sceneNumber);
+            */
+            //File System모드
+            PlayerDataManager.Instance.SceneNumber = SceneManager.GetActiveScene().buildIndex;
+            SaveLoad.SaveData();
+
+            //커서제어
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            //오프닝 연출 시작
             StartCoroutine(StartText());
             
         }

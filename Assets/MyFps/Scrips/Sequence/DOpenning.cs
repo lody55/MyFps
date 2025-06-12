@@ -1,9 +1,9 @@
 using MyDefence;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 namespace MyFps
 {
     //메인 2번씬 오프닝 클래스
@@ -23,6 +23,18 @@ namespace MyFps
         #region Unity Event Method
         private void Start()
         {
+            /*PlayerPrefs모드
+            //게임 데이터(씬 번호) 저장
+            int sceneNumber = SceneManager.GetActiveScene().buildIndex;
+            
+            PlayerPrefs.SetInt("SceneNumber", sceneNumber);
+            Debug.Log($"Save Scene number : {sceneNumber}");
+            */
+
+            //File System모드
+            PlayerDataManager.Instance.SceneNumber = SceneManager.GetActiveScene().buildIndex;
+            SaveLoad.SaveData();
+
             //커서 제어
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
